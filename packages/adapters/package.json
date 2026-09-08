@@ -1,0 +1,19 @@
+{
+  "name": "@glue/adapters",
+  "version": "0.1.0",
+  "description": "G.L.U.E. adapter SDK and built-in adapters (HTTP, CLI, local process)",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@glue/contracts": "*",
+    "pino": "^8.19.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "vitest": "^1.3.0"
+  }
+}

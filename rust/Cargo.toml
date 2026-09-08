@@ -1,0 +1,9 @@
+[workspace]
+members = ["glue-core", "glue-bindings", "glue-gateway"]
+resolver = "2"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+authors = ["G.L.U.E. project"]
+license = "MIT"
