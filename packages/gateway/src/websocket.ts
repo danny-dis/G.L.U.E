@@ -15,7 +15,7 @@ export function setupWebSocket(glue: Glue, wss: WebSocketServer): void {
     const sessionId = randomUUID();
     const session = glue.sessions.createSession();
 
-    glue.logger.info({ sessionId, glueSessionId: session.id }, 'WebSocket connected');
+    (glue as any).logger.info({ sessionId, glueSessionId: session.id }, 'WebSocket connected');
 
     ws.send(JSON.stringify({
       type: 'connected',
@@ -118,7 +118,7 @@ export function setupWebSocket(glue: Glue, wss: WebSocketServer): void {
     });
 
     ws.on('close', () => {
-      glue.logger.info({ sessionId }, 'WebSocket disconnected');
+      (glue as any).logger.info({ sessionId }, 'WebSocket disconnected');
     });
   });
 }

@@ -3,7 +3,7 @@
 import { Router as ExpressRouter } from 'express';
 import type { Glue } from './Glue.js';
 import { randomUUID } from 'node:crypto';
-import type { InvocationRequest } from '@glue/contracts';
+import type { InvocationRequest, GlueUri } from '@glue/contracts';
 
 export function createApiRouter(glue: Glue): ExpressRouter {
   const router = ExpressRouter();
@@ -24,7 +24,7 @@ export function createApiRouter(glue: Glue): ExpressRouter {
 
   // Get agent by ID
   router.get('/agents/:id', async (req, res) => {
-    const agent = await glue.registry.get(req.params.id);
+    const agent = await glue.registry.get(req.params.id as GlueUri);
     if (!agent) {
       res.status(404).json({ error: 'Agent not found' });
       return;
@@ -36,7 +36,7 @@ export function createApiRouter(glue: Glue): ExpressRouter {
   router.post('/agents', async (req, res) => {
     try {
       const id = await glue.discovery.registerManifest(req.body);
-      const agent = await glue.registry.get(id);
+      const agent = await glue.registry.get(id as GlueUri);
 
       await glue.provenance.record({
         type: 'AGENT_REGISTERED' as any,
@@ -56,7 +56,7 @@ export function createApiRouter(glue: Glue): ExpressRouter {
     try {
       const { state, reason } = req.body;
       await glue.discovery.advanceLifecycle(req.params.id, state, reason);
-      const agent = await glue.registry.get(req.params.id);
+      const agent = await glue.registry.get(req.params.id as GlueUri);
       res.json({ agent });
     } catch (err: any) {
       res.status(400).json({ error: err.message });
@@ -107,8 +107,8 @@ export function createApiRouter(glue: Glue): ExpressRouter {
     };
 
     // Policy check
-    const callerAgent = await glue.registry.get(caller);
-    const targetAgent = await glue.registry.get(route.agentId);
+    const callerAgent = await glue.registry.get(caller as GlueUri);
+    const targetAgent = await glue.registry.get(route.agentId as GlueUri);
     const decision = await glue.policy.evaluate(request, callerAgent, targetAgent);
 
     if (!decision.allowed) {

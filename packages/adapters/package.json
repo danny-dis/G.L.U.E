@@ -1,6 +1,6 @@
 {
   "name": "@glue/adapters",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "G.L.U.E. adapter SDK and built-in adapters (HTTP, CLI, local process)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

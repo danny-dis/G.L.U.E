@@ -3,7 +3,7 @@
 import type { AgentManifest } from '@glue/contracts';
 import { Registry } from '../registry/registry.js';
 import { CapabilityGraph } from '../capabilities/capability-graph.js';
-import { LifecycleState } from '@glue/contracts';
+import { LifecycleState, GlueUri } from '@glue/contracts';
 import type { Logger } from 'pino';
 
 export class DiscoveryEngine {
@@ -53,7 +53,7 @@ export class DiscoveryEngine {
   }
 
   async advanceLifecycle(agentId: string, newState: LifecycleState, reason?: string): Promise<void> {
-    await this.registry.updateLifecycle(agentId, newState, reason);
+    await this.registry.updateLifecycle(agentId as GlueUri, newState, reason);
     this.logger.info({ agentId, newState, reason }, 'Lifecycle advanced');
   }
 }

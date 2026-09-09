@@ -4,11 +4,11 @@ import type {
   AgentManifest,
   AgentRecord,
   GlueUri,
-  LifecycleState,
   TrustAssessment,
   ProvenanceRecord,
   LifecycleEntry,
 } from '@glue/contracts';
+import { LifecycleState } from '@glue/contracts';
 import { GLUE_AGENT_PREFIX, TrustState } from '@glue/contracts';
 import type { StorageBackend } from '../storage/memory.js';
 import { assertTransition } from '../lifecycle/state-machine.js';

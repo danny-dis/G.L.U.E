@@ -1,6 +1,6 @@
 {
   "name": "glue",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "private": true,
   "description": "G.L.U.E. — Generalized Layer for Unified Ecosystems. Agent federation and interoperability fabric.",
   "workspaces": [

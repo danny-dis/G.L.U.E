@@ -97,7 +97,7 @@ export abstract class BaseAdapter implements Adapter {
   protected defaultTimeoutMs: number;
 
   constructor(options: AdapterOptions) {
-    this.logger = options.logger.child({ adapter: this.name });
+    this.logger = options.logger.child({ adapter: (this as any).name ?? 'unknown' });
     this.defaultTimeoutMs = options.timeoutMs ?? 30000;
   }
 

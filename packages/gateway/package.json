@@ -1,6 +1,6 @@
 {
   "name": "@glue/gateway",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "G.L.U.E. gateway — HTTP API + WebSocket one-voice interface",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

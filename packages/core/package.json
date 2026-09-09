@@ -1,6 +1,6 @@
 {
   "name": "@glue/core",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "G.L.U.E. federation substrate — registry, discovery, capability graph, router, policy, trust, provenance, lifecycle",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

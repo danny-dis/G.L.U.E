@@ -86,7 +86,7 @@ export class PolicyEngine {
         const required = req.constraints?.trustLevel;
         if (!required || !target) return { allowed: true, reason: '' };
         const trustState = target.trust.state;
-        const hierarchy: TrustState[] = ['UNKNOWN', 'UNTRUSTED', 'PROVISIONAL', 'VERIFIED', 'TRUSTED'];
+        const hierarchy: TrustState[] = [TrustState.UNKNOWN, TrustState.UNTRUSTED, TrustState.PROVISIONAL, TrustState.VERIFIED, TrustState.TRUSTED];
         const requiredIdx = hierarchy.indexOf(required.toUpperCase() as TrustState);
         const actualIdx = hierarchy.indexOf(trustState);
         if (actualIdx < requiredIdx) {

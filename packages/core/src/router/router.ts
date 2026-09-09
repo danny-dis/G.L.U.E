@@ -40,7 +40,7 @@ export class Router {
 
     // Filter by trust score
     if (this.options.minTrustScore !== undefined) {
-      filtered = filtered.filter(c => c.trustScore >= this.options.minTrustScore);
+      filtered = filtered.filter(c => (c.trustScore ?? 0) >= this.options.minTrustScore!);
       if (filtered.length === 0) filtered = candidates;
     }
 
