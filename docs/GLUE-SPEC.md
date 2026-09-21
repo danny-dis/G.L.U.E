@@ -1,8 +1,8 @@
 # G.L.U.E. Federation Specification
 
 **Status:** Draft / Architecture Specification  
-**Version:** 0.1  
-**Date:** 2026-09-08
+**Version:** 0.2  
+**Date:** 2026-09-21
 
 ## Abstract
 
@@ -479,7 +479,47 @@ G.L.U.E. must not become:
 - an opaque multi-agent black box with no provenance;
 - an unrestricted privilege broker.
 
-## 19. Core Principle
+
+## 19. UHP / Harness Execution Architecture
+
+G.L.U.E. treats complete agent harness execution as a first-class federation concern without making UHP the universal federation protocol.
+
+```text
+Agent / Capability request
+        |
+     G.L.U.E.
+        |
+ identity + discovery + trust + policy + routing
+        |
+ execution profile
+        |
+ +------+------+----------------+
+ |             |                |
+ MCP           A2A          UHP / Harness
+                              |
+                         HarnessRouter
+                              |
+                    Codex / Claude / Hermes / ...
+```
+
+UHP is an execution protocol. GLUE remains the federation layer. HarnessRouter is one UHP implementation/provider.
+
+The full implementation contract is defined in [GLUE UHP / Harness Execution Integration Specification](GLUE-UHP-IMPLEMENTATION-SPEC.md).
+
+### Architectural rules
+
+1. UHP is a first-class adapter/protocol, not GLUE's master protocol.
+2. HarnessRouter is an external provider, not a GLUE subsystem.
+3. Complete harnesses are represented through explicit Harness and Execution Profile concepts.
+4. Execution, Invocation, Response, Session, Event, File, and Artifact are distinct resources.
+5. Trust and policy are evaluated before UHP execution.
+6. UHP streaming, cancellation, sessions, files, artifacts, and structured errors map into canonical GLUE contracts.
+7. Actual model/runtime attribution is preserved and may be supplied by dmr-X.
+8. UHP-specific implementation details remain inside the adapter.
+9. UHP support is validated by automated conformance tests.
+10. GLUE can operate without UHP; UHP is one execution path among many.
+
+## 20. Core Principle
 
 The long-term success criterion is simple:
 
