@@ -260,6 +260,7 @@ G.L.U.E.
 └── Adapter SDK
     ├── MCP
     ├── A2A
+    ├── UHP / Harness
     ├── ACP
     ├── HTTP / REST
     ├── WebSocket
@@ -268,10 +269,18 @@ G.L.U.E.
     └── Community adapters
 ```
 
+
+### UHP / Harness execution
+
+G.L.U.E. treats complete agent harness execution as a first-class adapter boundary. UHP is supported alongside MCP, A2A, HTTP, WebSocket, gRPC, CLI, and community protocols. HarnessRouter is one UHP provider; GLUE remains the federation layer rather than absorbing the HarnessRouter runtime.
+
+The implementation contract is defined in [`docs/GLUE-UHP-IMPLEMENTATION-SPEC.md`](docs/GLUE-UHP-IMPLEMENTATION-SPEC.md). It covers configured harnesses, execution profiles, sessions, streaming, cancellation, files/artifacts, structured failures, trust, policy, provenance, conformance, and the boundary with dmr-X and ATHENA.
+
 ## Repository documents
 
 - [`docs/GLUE-SPEC.md`](docs/GLUE-SPEC.md) — normative architecture and federation specification.
 - [`docs/GLUE-ENGINEERING.md`](docs/GLUE-ENGINEERING.md) — implementation architecture, contracts, adapters, security, testing, and delivery plan.
+- [`docs/GLUE-UHP-IMPLEMENTATION-SPEC.md`](docs/GLUE-UHP-IMPLEMENTATION-SPEC.md) — normative implementation plan for UHP/HarnessRouter execution integration.
 
 ## Design principles
 
