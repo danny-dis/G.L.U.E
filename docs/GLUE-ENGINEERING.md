@@ -1,8 +1,8 @@
 # G.L.U.E. Engineering Architecture
 
 **Status:** Draft  
-**Version:** 0.1  
-**Date:** 2026-09-08
+**Version:** 0.2  
+**Date:** 2026-09-21
 
 ## 1. Engineering Objective
 
@@ -502,7 +502,67 @@ Targets should be measured rather than assumed, but the architecture should aim 
 
 The first benchmark suite should establish real baselines.
 
-## 20. Implementation Phases
+
+## 20. UHP / Harness Execution Implementation
+
+UHP is now a first-class execution adapter in the target architecture. The detailed contract is defined in [GLUE UHP / Harness Execution Integration Specification](GLUE-UHP-IMPLEMENTATION-SPEC.md).
+
+The engineering model is:
+
+```text
+GLUE federation core
+  |
+  +-- canonical execution/session/event/artifact/error contracts
+  |
+  +-- adapter SDK
+        |
+        +-- MCP
+        +-- A2A
+        +-- HTTP
+        +-- ACP
+        +-- WebSocket
+        +-- gRPC
+        +-- CLI
+        +-- UHP
+               |
+               +-- HarnessRouter
+               +-- other UHP servers
+```
+
+### UHP implementation modules
+
+The target adapter should provide:
+
+- discovery and protocol/version detection;
+- harness and configured-harness discovery;
+- model discovery where available;
+- execution-profile mapping;
+- invocation and continuation;
+- streaming event normalization;
+- cancellation;
+- session inspection;
+- file/artifact access;
+- UHP error normalization;
+- authentication;
+- health/readiness;
+- provenance;
+- conformance tests.
+
+### Canonical execution model
+
+The core must distinguish `Invocation -> Execution -> Response` and independently `Session -> Events -> Artifacts`.
+
+This allows long-running harnesses to behave consistently with other GLUE protocols without leaking UHP-specific wire semantics into the federation core.
+
+### Security
+
+UHP targets are untrusted until admitted through GLUE identity, interface verification, capability verification, policy, and trust controls. Execution-capable harnesses must have explicit isolation, resource, credential, network, deadline, and cancellation boundaries.
+
+### Model/runtime boundary
+
+GLUE selects the capability/execution target. UHP drives the harness. dmr-X may select the actual model/runtime. GLUE records requested versus actual execution metadata.
+
+## 21. Implementation Phases
 
 ### Phase 0 — Contracts
 
